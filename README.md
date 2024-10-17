@@ -1,2 +1,4 @@
 # Protein-Complex-Atlas
-This is the public repo of protein compelex lab!
+## introduction
+Protein Complex Atlas is the code repository related to the paper "Atlas of Predicted Protein Complex Structures Across Kingdoms".
+
