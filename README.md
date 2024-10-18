@@ -1,6 +1,24 @@
 # Protein-Complex-Atlas
 ## introduction
-Protein Complex Atlas is the code repository related to the paper "Atlas of Predicted Protein Complex Structures Across Kingdoms".
+Protein-Complex-Atlas is the code repository related to the paper "Atlas of Predicted Protein Complex Structures Across Kingdoms".
+
+## High-quality protein complex dataset Predicted by Colabfold
+we constructed an atlas comprising **1.15 million** protein-protein interaction structures using ColabFold(https://github.com/YoshitakaMo/localcolabfold),encompassing proteome-level interactions from bacteria, archaea, human, mice, plant, and human-virus pairs. Overall, we identified **170,001** high-confidence protein complex structures, especially over 33,226 in the human interactome.
+
+We will be opening all high-quality protein complex structure data, as listed in the table below! 
+**Data avaliable**: [Bio view]:http://www.biostructurehub-zhejianglab.com/
+
+| Type        | Source               | number of high-quality protein complex |
+| ----------- | -------------------- | :---------------------------------: |
+| Heterodimer | Bacteria and Archaea | 70393                                |
+| Heterodimer | Human                | 33226                                |
+| Heterodimer | Mouse                | 11529                                |
+| Heterodimer | Arabidopsis          | 6281                                 |
+| Heterodimer | Human-Virus          | 4646                                 |
+| Homodimer   | Bacteria             | 35585                                |
+| Homodimer   | Virulence factor     | 8082                                 |
+| Homodimer   | Virus                | 259                                  |
+|             | Total                | 170001                               |
 
 
 ## Analysis of Potential Spatial Clashes in Predicted Protein Complexes
