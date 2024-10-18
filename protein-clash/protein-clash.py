@@ -276,12 +276,12 @@ def merge_csv_files(file_list, output_file):
 
 # Example usage  
 # Process human-human dataset  
-file_list = ['../data/human_human.csv']  
+file_list = ['./data/human_human.csv']  
 human_human_complexes_file='merged_human_human_complexes_output.csv'  
 merge_csv_files(file_list, human_human_complexes_file)  
 
 # Process human-virus dataset  
-file_list = ['../data/human_virus.csv']  
+file_list = ['./data/human_virus.csv']  
 human_virus_complexes_file='merged_human_virus_complexes_output.csv'  
 merge_csv_files(file_list, human_virus_complexes_file)  
 
