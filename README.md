@@ -3,7 +3,7 @@
 Protein-Complex-Atlas is the code repository related to the paper "Atlas of Predicted Protein Complex Structures Across Kingdoms".
 
 ## High-quality protein complex dataset Predicted by Colabfold
-we constructed an atlas comprising **1.15 million** protein-protein interaction structures using ColabFold (https://github.com/YoshitakaMo/localcolabfold) , encompassing proteome-level interactions from bacteria, archaea, human, mice, plant, and human-virus pairs. Overall, we identified **170,001** high-confidence protein complex structures, especially over 33,226 in the human interactome.
+we constructed an atlas comprising **1.15 million** protein-protein interaction structures using ColabFold (https://github.com/YoshitakaMo/localcolabfold) , encompassing proteome-level interactions from bacteria, archaea, human, mice, plant, and human-virus pairs. Overall, we identified **170,001** high-confidence protein complex structures, especially over **33,226** in the human interactome.
 
 We will be opening all high-quality protein complex structure data, as listed in the table below! 
 
