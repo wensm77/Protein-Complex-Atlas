@@ -213,13 +213,6 @@ cd experiment
 python inference.py --input [pdb_folder] --output [prediction_folder] --version 2 --binding_type [0]
 ```
 
-### Key Arguments
-
-- `--input`: Folder containing input PDB files
-- `--output`: Output folder name (created within input folder)
-- `--version`: Model version to use for prediction (recommend version 2)
-- `--binding_type`: List of binding types to predict
-
 ### Output Format
 
 The binding site predictions are stored in the **B-factor column** of the output PDB files. Prediction scores range from 0.0 to 1.0, where higher values indicate higher binding probability.
