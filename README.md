@@ -248,7 +248,7 @@ python deduplicate/chain_deduplicate.py \
 
 The `surface_deduplicate.py` script scans Foldseek search results (in `.m8` format) to identify pairs of proteins that have significant overlap in their binding interface regions. This helps filter out proteins that may be functionally redundant even if their overall structure is different.
 
-prepare the format like this:
+prepare binding_sites.csv format like this:
 ```
 ID,Label
 ID_123, 0011...
