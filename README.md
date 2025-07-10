@@ -104,31 +104,162 @@ The main workflow of the code involves:
 2. align sequences and superimposes structures by searching for matching human protein sequences in the human protein-protein complex database. If a match is found, the viral protein structure is superimposed onto the human complex to align the human proteins closely. The code calculates spatial distances between the viral protein and other human proteins in the complex, identifying potential spatial clashes when distances fall below a predefined threshold. 
 3. Finally, the results, including clash information and structural details, are saved to a CSV file.
 
-## Multimer-Surface
-The scripts of this project are used to predict the surface residues of proteins, extracting features using **SaProt** , and implementing residue prediction through the integration of a **Transformer** model and prediction head.
+## ProteinMPNN Data Processing
+
+You should clone ProteinMPNN repository first.
+```bash
+git clone https://github.com/dauparas/ProteinMPNN.git
+```
+
+###  Data Processing Pipeline
+
+### 1. PDB Preprocessing
+
+```bash
+# Rename PDB files
+python mapping_new_id.py
+
+# Convert PDB to CIF format (multi-threaded)
+python convert_pdb_to_cif_multiThread.py
+```
+
+### 2. Sequence Clustering
+
+```bash
+# Extract sequences from PDB files
+python pdb2fasta.py
+
+# Cluster sequences using Foldseek
+foldseek easy-multimercluster pdb/ clu tmp --multimer-tm-threshold 0.65 --chain-tm-threshold 0.5 --interface-lddt-threshold 0.65
+
+# Convert to CSV format
+python tsv2csv.py
+```
+
+### 3. Data Processing
+
+```bash
+# Update sequence information and metadata
+python csv_update_sequence.py
+python csv_fix.py
+python final.csv.py
+
+# Generate train/validation/test splits
+python test_data_chose.py
+```
+
+### Training
+
+Use `training.py` to fine-tune the model.
+
+```bash
+python ProteinMPNN/training/training.py \
+    --path_for_training_data <path_to_your_data_folder> \
+    --path_for_outputs <path_to_your_experiment_output> \
+    --previous_checkpoint <path_to_pretrained_model.pt>
+```
+
+### Inference
+
+To generate sequences for a new PDB structure, use `protein_mpnn_run.py`.
+
+```bash
+python ProteinMPNN/protein_mpnn_run.py \
+    --pdb_path <path_to_input.pdb> \
+    --pdb_path_chains "A" \
+    --out_folder <path_to_output_folder> \
+    --num_seq_per_target 8
+```
+
+## MPBind
 
 ### Installation
 
-Before starting to use, please ensure that the runtime environment is consistent with the [SaProt](https://github.com/westlake-repl/SaProt) project. We will provide an `environment.sh` script to assist in setting up the environment.
+please ensure that your runtime environment meets the requirements.
 
 ### Environment Setup
 
-Please download and run our provided `environment.sh` script to configure the required runtime environment.
-
+1. **Clone the repository:**
 ```bash
-conda create -n SaProt python=3.10
-conda activate SaProt
-
-bash environment.sh
+git clone https://github.com/jianlin-cheng/MPBind.git
+cd MPBind
 ```
+
+2. **Create and activate conda environment:**
+```bash
+conda env create -f MPBind.yml
+conda activate MPBind
+```
+
+### Training
+
+MPBind supports training custom models on your own datasets. The training process is based on MPBind.
+
+
+### Prediction
+
+MPBind predicts multiple types of binding sites on protein structures from PDB files. We only focus on protein-protein binding sites.
 
 ### Usage
 
-We choose to use [SaProt_650M_AF2](https://huggingface.co/westlake-repl/SaProt_650M_AF2), and the SaProt GitHub page also provides other parameters for download.
+```bash
+# Activate environment
+conda activate MPBind
 
-#### Feature Extraction
-We opt to use SaProt to save features locally for subsequent use.
-Modify the value of `data_csv` in the script `python prep_data.py`.
+# Navigate to experiment folder
+cd experiment
 
-#### Inference
-`python inf.py`
+# Basic prediction command
+python inference.py --input [pdb_folder] --output [prediction_folder] --version 2 --binding_type [0]
+```
+
+### Key Arguments
+
+- `--input`: Folder containing input PDB files
+- `--output`: Output folder name (created within input folder)
+- `--version`: Model version to use for prediction (recommend version 2)
+- `--binding_type`: List of binding types to predict
+
+### Output Format
+
+The binding site predictions are stored in the **B-factor column** of the output PDB files. Prediction scores range from 0.0 to 1.0, where higher values indicate higher binding probability.
+
+
+### Evaluation
+
+To evaluate prediction performance, we use a threshold of **0.5** on the output B-factor scores to classify each residue as an interface (1) or non-interface (0) residue. Standard metrics such as Precision, Recall, AUC and F1-score are then calculated by comparing these binary predictions against the ground truth labels using the `sklearn.metrics` library.
+
+
+## Data Deduplication Scripts
+
+Includes two main scripts for ensuring data quality and preventing data leakage between training and test sets by removing structurally similar proteins.
+
+### 1. Chain-level Deduplication
+
+The `chain_deduplicate.py` script filters a dataset to remove any protein chains that belong to the same structural cluster as chains in another dataset.
+
+**Usage:**
+
+```bash
+python deduplicate/chain_deduplicate.py \
+    --cluster_file <path_to_cluster.tsv> \
+    --train_file <path_to_train_data.csv> \
+    --test_file <path_to_test_data.csv> \
+    --train_id_column "CHAINID" \
+    --test_id_column "CHAINID" \
+    --output_filtered_test "filtered_test_set.csv" \
+    --output_overlap_report "overlap_report.csv"
+```
+
+### 2. Surface-level (Interface) Deduplication
+
+The `surface_deduplicate.py` script scans Foldseek search results (in `.m8` format) to identify pairs of proteins that have significant overlap in their binding interface regions. This helps filter out proteins that may be functionally redundant even if their overall structure is different.
+
+**Usage:**
+
+```bash
+python deduplicate/surface_deduplicate.py \
+    --m8_dir <path_to_folder_with_m8_files> \
+    --binding_sites_file <path_to_binding_sites.csv> \
+    --output_file "similar_surface_ids.csv"
+```
