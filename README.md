@@ -173,10 +173,6 @@ python ProteinMPNN/protein_mpnn_run.py \
 
 ## MPBind
 
-### Installation
-
-please ensure that your runtime environment meets the requirements.
-
 ### Environment Setup
 
 1. **Clone the repository:**
@@ -265,18 +261,15 @@ python deduplicate/surface_deduplicate.py \
 
 ## af3 and inspired model evaluation
 
-**Usage:**
-The prediction scripts are located in `af3_and_inspiredmodel_eval/`. You need to configure the `INPUT_DIR` and `BASE_OUTPUT_DIR` variables inside the scripts before running.
 
-- **ESM-based Prediction:**
-  ```bash
-  python af3_and_inspiredmodel_eval/chai1_esm_predict.py
-  ```
-
-- **MSA-based Prediction:** 
-  ```bash
-  python af3_and_inspiredmodel_eval/chai1_msa_predict.py
-  ```
+### chai-1 Prediction (ESM version)
+```bash
+python af3_and_inspiredmodel_eval/chai1_esm_predict.py
+```
+### chai-1 Prediction (MSA version)
+```bash
+python af3_and_inspiredmodel_eval/chai1_msa_predict.py
+```
 
 ### Boltz Prediction
 ```bash
