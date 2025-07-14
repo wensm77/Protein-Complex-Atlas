@@ -262,3 +262,33 @@ python deduplicate/surface_deduplicate.py \
     --binding_sites_file <path_to_binding_sites.csv> \
     --output_file "similar_surface_ids.csv"
 ```
+
+## af3 and inspired model evaluation
+
+**Usage:**
+The prediction scripts are located in `af3_and_inspiredmodel_eval/`. You need to configure the `INPUT_DIR` and `BASE_OUTPUT_DIR` variables inside the scripts before running.
+
+- **ESM-based Prediction:**
+  ```bash
+  python af3_and_inspiredmodel_eval/chai1_esm_predict.py
+  ```
+
+- **MSA-based Prediction:** 
+  ```bash
+  python af3_and_inspiredmodel_eval/chai1_msa_predict.py
+  ```
+
+### Boltz Prediction
+```bash
+boltz predict input_path --recycling_steps 3 --sampling_steps 200 --diffusion_samples 5 --use_msa_server
+```
+
+### Protenix Prediction (ESM version)
+```bash
+protenix predict --input input.json --out_dir ./output_no_msa --seeds 101 --use_esm
+```
+### Protenix Prediction (MSA version)
+```bash
+bash af3_and_inspiredmodel_eval/inference_batch_msa.sh
+```
+
