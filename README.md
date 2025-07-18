@@ -285,3 +285,6 @@ protenix predict --input input.json --out_dir ./output_no_msa --seeds 101 --use_
 bash af3_and_inspiredmodel_eval/inference_batch_msa.sh
 ```
 
+## License
+
+This project is licensed under the MIT License.
