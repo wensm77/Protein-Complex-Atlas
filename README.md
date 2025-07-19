@@ -3,21 +3,8 @@
 Protein-Complex-Atlas is the code repository related to the paper "Atlas of Predicted Protein Complex Structures Across Kingdoms".
 
 ## High-quality protein complex dataset Predicted by Colabfold
-we constructed an atlas comprising **1.15 million** protein-protein interaction structures using ColabFold (https://github.com/YoshitakaMo/localcolabfold) , encompassing proteome-level interactions from bacteria, archaea, human, mice, plant, and human-virus pairs. Overall, we identified **170,001** high-confidence protein complex structures, especially over **33,226** in the human interactome.
+Protein complexes are fundamental to all biological processes. Public databases have been enriched with millions of potential protein-protein interaction entries for human and model organisms. However, accurately depicting large-scale of protein complex structures across kingdoms, including both the database-curated potential hits and a vast number of unidentified interactions in the prokaryotic genomes, has significantly lagged behind. Here, we constructed an atlas comprising 1.1 million protein-protein interaction structures using AlphaFold2-based ColabFold, encompassing proteome-level interactions from bacteria, archaea, human, mouse, plant, and human-virus pairs. Overall, we identified 181,671 high-confidence protein complex structures, including 37,855 in the human interactome and 108,879 among 224 types of prokaryotic species. Through structural clustering, protein complexes that exhibit conserved structures across multiple kingdoms have been detected, which aids in elucidating their previously unknown functions. Further analysis validated by Co-Immunoprecipitation experiments indicated multiple potential new viral receptors for Human mastadenovirus A and Papiine alphaherpesvirus 2. Additionally, we uncovered widespread gene fusion or fission events throughout evolution by integrating our protein complex structures with the AlphaFold-predicted monomer structure database. Finally, we extended the applicability of our dataset for enhanced protein binding surface prediction and protein sequence design by deep learning models, displayed the integrated value beyond each structure. We anticipate that our large-scale atlas of predicted protein complexes will prove valuable for further research and applications.
 
-We will be opening all high-quality protein complex structure data, as listed in the table below! 
-
-| Type        | Source               | number of high-quality protein complex |
-| ----------- | -------------------- | :---------------------------------: |
-| Heterodimer | Bacteria and Archaea | 70393                                |
-| Heterodimer | Human                | 33226                                |
-| Heterodimer | Mouse                | 11529                                |
-| Heterodimer | Arabidopsis          | 6281                                 |
-| Heterodimer | Human-Virus          | 4646                                 |
-| Homodimer   | Bacteria             | 35585                                |
-| Homodimer   | Virulence factor     | 8082                                 |
-| Homodimer   | Virus                | 259                                  |
-|             | Total                | 170001                               |
 
 
 ## Co-Localization User Guide
