@@ -26,8 +26,9 @@ The runtime environment must contain **MMseqs2 Release 15-6f452** (https://githu
 
 It is not difficult to use the scripts to calculate the matrices. The steps to run such part are listed:
 
-1. Run `setup_database.sh` to prepare all necessary  databases;
-2. Run `src/co_localization.sh` to calculate co-localization score matrices and find all potential protein-protein interactions (PPIs) for downstream predicting workflow.
+1. Download the 36 **pathogens** and **NCBI** fasta-files to your local host;
+2. Run `setup_database.sh` to prepare all necessary  databases;
+3. Run `src/co_localization.sh` to calculate co-localization score matrices and find all potential protein-protein interactions (PPIs) for downstream predicting workflow.
 
 Fasta-files consist of two parts: 36 pathogens as query databases and 13 split NCBI databases as target databases.
 
